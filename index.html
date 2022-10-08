@@ -16,11 +16,23 @@
     // 우편번호 찾기 화면을 넣을 element
     var element_layer = document.getElementById('layer');
 
-    function closeDaumPostcode() {
-        // iframe을 넣은 element를 안보이게 한다.
-        // element_layer.style.display = 'none';
+    window.addEventListener("message", onReceivedPostMessage, false);
+
+    function onReceivedPostMessage(event){
+        //..ex deconstruct event into action & params
+        var action = event.data.action;
+        var params = event.data.params;
+
+        console.log("onReceivedPostMessage "+event);
     }
-    // sample2_execDaumPostcode()
+
+    function onReceivedActivityMessageViaJavascriptInterface(json){
+        //..ex deconstruct data into action & params
+        var data = JSON.parse(json);
+        var action = data.action;
+        var params = data.params;
+        console.log("onReceivedActivityMessageViaJavascriptInterface "+event);
+    }
 
     new daum.Postcode({
         oncomplete: function(data) {
@@ -68,6 +80,8 @@
             console.log(data)
             console.log(`addr: ${addr}`)
             console.log(`addr: ${extraAddr}`)
+
+            window.Bridge.getAddressData(addr)
 
             // iframe을 넣은 element를 안보이게 한다.
             // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
