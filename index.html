@@ -78,11 +78,8 @@
             // 커서를 상세주소 필드로 이동한다.
             // document.getElementById("sample2_detailAddress").focus();
 
-            // console.log(data)
-            // console.log(`addr: ${addr}`)
-            // console.log(`extra addr: ${extraAddr}`)
             let addressData = {
-                addressType: data.jibunAddress ? "J" : "R",
+                addressType: data.addressType,
                 zoneCode: data.zonecode,
                 city: data.sido,
                 roadAddress: data.roadAddress,
